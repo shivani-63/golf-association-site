@@ -1,0 +1,72 @@
+{
+  "site": {
+    "title": "HEAVY WOOLLEN DISTRICT RABBITS GOLF LEAGUE",
+    "logo": "./assets/league-logo.png"
+  },
+  "clubs": [
+    {
+      "name": "Huddersfield Golf Club",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "name": "Halifax Bradley Hall",
+      "image": "https://images.unsplash.com/photo-1592919505780-303950717480?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "name": "Low Moor Club",
+      "image": "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=1200&q=80"
+    }
+  ],
+  "fixtures": [
+    {
+      "date": "2026-05-01",
+      "home": "Huddersfield",
+      "away": "Low Moor",
+      "venue": "Huddersfield"
+    },
+    {
+      "date": "2026-05-08",
+      "home": "Halifax",
+      "away": "Huddersfield",
+      "venue": "Halifax"
+    }
+  ],
+  "results": [
+    {
+      "date": "2026-04-12",
+      "fixture": "Low Moor vs Halifax",
+      "score": "4 - 3"
+    },
+    {
+      "date": "2026-04-19",
+      "fixture": "Huddersfield vs Halifax",
+      "score": "5 - 2"
+    }
+  ],
+  "leagueTable": [
+    {
+      "team": "Huddersfield",
+      "p": 5,
+      "w": 4,
+      "d": 0,
+      "l": 1,
+      "pts": 12
+    },
+    {
+      "team": "Halifax",
+      "p": 5,
+      "w": 3,
+      "d": 1,
+      "l": 1,
+      "pts": 10
+    },
+    {
+      "team": "Low Moor",
+      "p": 5,
+      "w": 1,
+      "d": 1,
+      "l": 3,
+      "pts": 4
+    }
+  ]
+}

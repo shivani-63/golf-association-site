@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golf League Admin</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="admin">
+    <header>
+      <div class="header-inner">
+        <div class="logo-title-wrap">
+          <div class="site-title">Golf League Admin</div>
+        </div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="./index.html">Back to website</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="admin-shell">
+      <section class="admin-card">
+        <h2>Admin sign in</h2>
+        <p class="small-note">Use your private admin password to unlock editing.</p>
+        <div class="admin-grid">
+          <label>
+            Password
+            <input id="admin-password-input" type="password" autocomplete="current-password" />
+          </label>
+        </div>
+        <div class="btn-row" style="margin-top: 12px;">
+          <button id="admin-login-btn" type="button">Sign in</button>
+          <button id="admin-logout-btn" type="button" class="secondary">Sign out</button>
+        </div>
+        <p id="auth-status-msg" class="small-note"></p>
+      </section>
+
+      <div id="admin-editor" hidden>
+        <section class="admin-card">
+          <h2>Site settings</h2>
+          <div class="admin-grid">
+            <label>
+              Site title
+              <input id="site-title-input" type="text" />
+            </label>
+            <label>
+              Logo URL
+              <input id="site-logo-input" type="url" />
+            </label>
+          </div>
+        </section>
+
+        <section class="admin-card">
+          <h2>Slideshow clubs</h2>
+          <p class="small-note">
+            Enter valid JSON array format:
+            <code>[{"name":"Club Name","image":"https://..." }]</code>
+          </p>
+          <textarea id="clubs-input"></textarea>
+        </section>
+
+        <section class="admin-card">
+          <h2>Fixtures</h2>
+          <p class="small-note">
+            JSON fields required: <code>date</code>, <code>home</code>, <code>away</code>,
+            <code>venue</code>
+          </p>
+          <textarea id="fixtures-input"></textarea>
+        </section>
+
+        <section class="admin-card">
+          <h2>Results</h2>
+          <p class="small-note">
+            JSON fields required: <code>date</code>, <code>fixture</code>, <code>score</code>
+          </p>
+          <textarea id="results-input"></textarea>
+        </section>
+
+        <section class="admin-card">
+          <h2>League table</h2>
+          <p class="small-note">
+            JSON fields required: <code>team</code>, <code>p</code>, <code>w</code>, <code>d</code>,
+            <code>l</code>, <code>pts</code>
+          </p>
+          <textarea id="league-input"></textarea>
+        </section>
+
+        <section class="admin-card">
+          <div class="btn-row">
+            <button id="save-btn" type="button">Save updates</button>
+            <button id="export-btn" type="button" class="secondary">Export backup</button>
+            <label
+              class="secondary"
+              style="display:inline-flex;align-items:center;padding:10px 14px;border-radius:6px;background:#475569;color:#fff;cursor:pointer;"
+            >
+              Import backup
+              <input id="import-file" type="file" accept=".json" style="display:none;" />
+            </label>
+          </div>
+          <p id="status-msg" class="small-note"></p>
+        </section>
+      </div>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

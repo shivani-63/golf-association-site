@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heavy Woollen District Rabbits Golf League</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div class="logo-title-wrap">
+          <img
+            id="site-logo"
+            class="site-logo"
+            src="./assets/league-logo.png"
+            alt="League logo"
+          />
+        </div>
+
+        <button
+          id="menu-toggle"
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          aria-label="Open main menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav id="primary-navigation" class="main-nav" aria-label="Main navigation">
+          <ul class="nav-list">
+            <li><a href="#home">Home</a></li>
+            <li class="has-submenu">
+              <a href="#officials">Officials</a>
+              <ul class="submenu">
+                <li><a href="#officials">Current Officials</a></li>
+                <li><a href="#officials">Past Presidents</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#leagues">Leagues</a>
+              <ul class="submenu">
+                <li><a href="#league-table">Division 1</a></li>
+                <li><a href="#league-table">Division 2</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#competitions">Competitions</a>
+              <ul class="submenu">
+                <li><a href="#competitions">Team Knockouts</a></li>
+                <li><a href="#competitions">President's Cup</a></li>
+              </ul>
+            </li>
+            <li><a href="#rules">Rules</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section id="home" class="hero-section">
+        <div class="slideshow-frame">
+          <button id="prev-slide" class="slide-arrow" aria-label="Previous slide">&#10094;</button>
+          <div class="slide-content">
+            <img id="slide-image" class="slide-image" src="" alt="Golf club" />
+            <h2 id="slide-name" class="slide-name"></h2>
+          </div>
+          <button id="next-slide" class="slide-arrow" aria-label="Next slide">&#10095;</button>
+        </div>
+        <div id="slide-dots" class="slide-dots" aria-label="Slide indicators"></div>
+      </section>
+
+      <section id="fixtures" class="content-section">
+        <h3>Upcoming Fixtures</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Home</th>
+                <th>Away</th>
+                <th>Venue</th>
+              </tr>
+            </thead>
+            <tbody id="fixtures-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="results" class="content-section">
+        <h3>Recent Results</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Fixture</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="results-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="league-table" class="content-section">
+        <h3>League Table</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Team</th>
+                <th>P</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>Pts</th>
+              </tr>
+            </thead>
+            <tbody id="league-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <h4>League Clubs</h4>
+        <div id="club-footer-list" class="club-footer-list" aria-label="League clubs"></div>
+      </div>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
