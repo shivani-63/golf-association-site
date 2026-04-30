@@ -284,36 +284,17 @@ function setupClubSlider(clubs) {
 
   const slideImage = document.getElementById("slide-image");
   const slideName = document.getElementById("slide-name");
-  const dotsContainer = document.getElementById("slide-dots");
   const prevBtn = document.getElementById("prev-slide");
   const nextBtn = document.getElementById("next-slide");
 
-  function renderDots() {
-    if (!dotsContainer) return;
-
-    dotsContainer.innerHTML = "";
-
-    clubs.forEach((_, index) => {
-      const dot = document.createElement("button");
-      dot.className = `dot${index === slideIndex ? " active" : ""}`;
-      dot.type = "button";
-      dot.addEventListener("click", () => {
-        slideIndex = index;
-        renderSlide();
-      });
-
-      dotsContainer.appendChild(dot);
-    });
-  }
+  if (!slideImage || !slideName) return;
 
   function renderSlide() {
     const club = clubs[slideIndex];
-    if (!club || !slideImage || !slideName) return;
 
     slideImage.src = club.image;
     slideImage.alt = club.name;
     slideName.textContent = club.name;
-    renderDots();
   }
 
   prevBtn?.addEventListener("click", () => {
