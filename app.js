@@ -85,6 +85,7 @@ function calculateLeagueTable(fixtures, teams, division) {
         pointsFor: 0,
         pointsAgainst: 0,
         pointsDiff: 0,
+        awayPoints: 0,
         points: 0,
       };
     });
@@ -107,23 +108,22 @@ function calculateLeagueTable(fixtures, teams, division) {
 
       home.pointsFor += homeScore;
       home.pointsAgainst += awayScore;
+      home.points += homeScore;
 
       away.pointsFor += awayScore;
       away.pointsAgainst += homeScore;
+      away.points += awayScore;
+      away.awayPoints += awayScore;
 
       if (homeScore > awayScore) {
         home.won++;
         away.lost++;
-        home.points += 2;
       } else if (homeScore < awayScore) {
         away.won++;
         home.lost++;
-        away.points += 2;
       } else {
         home.drawn++;
         away.drawn++;
-        home.points += 1;
-        away.points += 1;
       }
     });
 
@@ -135,6 +135,7 @@ function calculateLeagueTable(fixtures, teams, division) {
     .sort(
       (a, b) =>
         b.points - a.points ||
+        b.awayPoints - a.awayPoints ||
         b.pointsDiff - a.pointsDiff ||
         b.pointsFor - a.pointsFor ||
         a.team.localeCompare(b.team),
@@ -370,8 +371,12 @@ function initSiteChrome() {
   if (logoEl) logoEl.src = SITE_DATA.logo;
 
   setupMobileMenu();
-  setupClubSlider(SITE_DATA.clubs);
   renderClubFooter(SITE_DATA.clubs);
+}
+
+function initHomePage() {
+  initSiteChrome();
+  setupClubSlider(SITE_DATA.clubs);
 }
 
 async function initFixturesPage() {
@@ -416,15 +421,13 @@ async function initLeagueTablesPage() {
       division1Fixtures,
       teams,
       "Division 1",
-    ).map((team) => ({
+    ).map((team, index) => ({
+      pos: index + 1,
       team: team.team,
       p: team.played,
       w: team.won,
       d: team.drawn,
       l: team.lost,
-      pf: team.pointsFor,
-      pa: team.pointsAgainst,
-      pd: team.pointsDiff,
       pts: team.points,
     }));
 
@@ -432,40 +435,50 @@ async function initLeagueTablesPage() {
       division2Fixtures,
       teams,
       "Division 2",
-    ).map((team) => ({
+    ).map((team, index) => ({
+      pos: index + 1,
       team: team.team,
       p: team.played,
       w: team.won,
       d: team.drawn,
       l: team.lost,
-      pf: team.pointsFor,
-      pa: team.pointsAgainst,
-      pd: team.pointsDiff,
       pts: team.points,
     }));
 
     renderTableRows("division-1-league-table-body", division1Table, [
+      "pos",
       "team",
       "p",
       "w",
       "d",
       "l",
-      "pf",
-      "pa",
-      "pd",
       "pts",
     ]);
 
     renderTableRows("division-2-league-table-body", division2Table, [
+      "pos",
       "team",
       "p",
       "w",
       "d",
       "l",
-      "pf",
-      "pa",
-      "pd",
       "pts",
+    ]);
+
+    const recentResults = [...division1Fixtures, ...division2Fixtures]
+      .filter((match) => match.played?.toUpperCase() === "TRUE")
+      .sort(sortByDateDescending)
+      .slice(0, 5)
+      .map((match) => ({
+        date: match.date,
+        fixture: `${match.home} vs ${match.away}`,
+        score: `${match.home_score} - ${match.away_score}`,
+      }));
+
+    renderTableRows("results-table", recentResults, [
+      "date",
+      "fixture",
+      "score",
     ]);
   } catch (error) {
     showError(error.message);
@@ -473,13 +486,15 @@ async function initLeagueTablesPage() {
 }
 
 async function initPage() {
-  initSiteChrome();
-
   const pageType = document.body.dataset.page;
 
-  if (pageType === "league-tables") {
+  if (pageType === "home") {
+    initHomePage();
+  } else if (pageType === "league-tables") {
+    initSiteChrome();
     await initLeagueTablesPage();
   } else {
+    initSiteChrome();
     await initFixturesPage();
   }
 }

@@ -2,137 +2,47 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Heavy Woollen District Rabbits Golf League</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <header>
-      <div class="header-inner">
-        <div class="logo-title-wrap">
-          <img
-            id="site-logo"
-            class="site-logo"
-            src="./assets/league-logo.png"
-            alt="League logo"
-          />
-        </div>
 
-        <button
-          id="menu-toggle"
-          class="menu-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-          aria-label="Open main menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav id="primary-navigation" class="main-nav" aria-label="Main navigation">
-          <ul class="nav-list">
-            <li><a href="#home">Home</a></li>
-            <li class="has-submenu">
-              <a href="#officials">Officials</a>
-              <ul class="submenu">
-                <li><a href="#officials">Current Officials</a></li>
-                <li><a href="#officials">Past Presidents</a></li>
-              </ul>
-            </li>
-            <li class="has-submenu">
-              <a href="#leagues">Leagues</a>
-              <ul class="submenu">
-                <li><a href="#league-table">Division 1</a></li>
-                <li><a href="#league-table">Division 2</a></li>
-              </ul>
-            </li>
-            <li class="has-submenu">
-              <a href="#competitions">Competitions</a>
-              <ul class="submenu">
-                <li><a href="#competitions">Team Knockouts</a></li>
-                <li><a href="#competitions">President's Cup</a></li>
-              </ul>
-            </li>
-            <li><a href="#rules">Rules</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+  <body data-page="home">
+    <section class="hero-slider">
+      <button id="prev-slide" type="button">‹</button>
 
-    <main class="page-shell">
-      <section id="home" class="hero-section">
-        <div class="slideshow-frame">
-          <button id="prev-slide" class="slide-arrow" aria-label="Previous slide">&#10094;</button>
-          <div class="slide-content">
-            <img id="slide-image" class="slide-image" src="" alt="Golf club" />
-            <h2 id="slide-name" class="slide-name"></h2>
-          </div>
-          <button id="next-slide" class="slide-arrow" aria-label="Next slide">&#10095;</button>
-        </div>
-        <div id="slide-dots" class="slide-dots" aria-label="Slide indicators"></div>
-      </section>
+      <img id="slide-image" alt="Club image" />
+      <h2 id="slide-name"></h2>
 
-      <section id="fixtures" class="content-section">
-        <h3>Upcoming Fixtures</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Home</th>
-                <th>Away</th>
-                <th>Venue</th>
-              </tr>
-            </thead>
-            <tbody id="fixtures-table"></tbody>
-          </table>
-        </div>
-      </section>
+      <button id="next-slide" type="button">›</button>
+      <div id="slide-dots"></div>
+    </section>
 
-      <section id="results" class="content-section">
-        <h3>Recent Results</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Fixture</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody id="results-table"></tbody>
-          </table>
-        </div>
-      </section>
+    <main>
+      <h1>Upcoming Events</h1>
 
-      <section id="league-table" class="content-section">
-        <h3>League Table</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Team</th>
-                <th>P</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>Pts</th>
-              </tr>
-            </thead>
-            <tbody id="league-table-body"></tbody>
-          </table>
-        </div>
-      </section>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Event</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2026-05-01</td>
+            <td>Opening Fixture Night</td>
+            <td>Details to be confirmed</td>
+          </tr>
+          <tr>
+            <td>2026-06-10</td>
+            <td>League Meeting</td>
+            <td>Venue TBC</td>
+          </tr>
+        </tbody>
+      </table>
     </main>
 
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <h4>League Clubs</h4>
-        <div id="club-footer-list" class="club-footer-list" aria-label="League clubs"></div>
-      </div>
-    </footer>
-
-    <script src="./app.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
