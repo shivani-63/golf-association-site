@@ -222,9 +222,11 @@ header {
 
 .slide-image {
   width: 100%;
-  max-height: 440px;
+  height: 360px;
   object-fit: cover;
+  object-position: center;
   border-radius: 14px;
+  display: block;
 }
 
 .slide-name {
@@ -263,10 +265,7 @@ header {
 }
 
 .slide-dots {
-  margin-top: 12px;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+  display: none;
 }
 
 .dot {
@@ -612,71 +611,4 @@ button.secondary {
   .club-footer-list {
     grid-template-columns: 1fr;
   }
-}
-
-.hero-slider {
-  max-width: 1100px;
-  margin: 40px auto 30px;
-  position: relative;
-  border-radius: 22px;
-  overflow: hidden;
-  height: 420px;
-  background: #0b4228;
-}
-
-.hero-slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.hero-slider::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 40, 20, 0.75),
-    rgba(0, 40, 20, 0.1)
-  );
-}
-
-#slide-name {
-  position: absolute;
-  left: 32px;
-  bottom: 28px;
-  z-index: 2;
-  color: white;
-  font-size: 2rem;
-  margin: 0;
-}
-
-#prev-slide,
-#next-slide {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-  border: none;
-  background: rgba(255, 255, 255, 0.85);
-  color: #064226;
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
-  font-size: 1.8rem;
-  cursor: pointer;
-}
-
-#prev-slide {
-  left: 18px;
-}
-
-#next-slide {
-  right: 18px;
-}
-
-#slide-dots {
-  display: none;
 }

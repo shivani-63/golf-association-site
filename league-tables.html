@@ -6,6 +6,67 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body data-page="league-tables">
+    <header>
+      <div class="header-inner">
+        <div class="logo-title-wrap">
+          <img
+            id="site-logo"
+            class="site-logo"
+            src="./assets/league-logo.png"
+            alt="League logo"
+          />
+        </div>
+
+        <button
+          id="menu-toggle"
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          aria-label="Open main menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav
+          id="primary-navigation"
+          class="main-nav"
+          aria-label="Main navigation"
+        >
+          <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+
+            <li class="has-submenu">
+              <a href="#">Officials</a>
+              <ul class="submenu">
+                <li><a href="current-officials.html">Current Officials</a></li>
+                <li><a href="past-presidents.html">Past Presidents</a></li>
+              </ul>
+            </li>
+
+            <li class="has-submenu">
+              <a href="#">Leagues</a>
+              <ul class="submenu">
+                <li><a href="division-1.html">Division 1 Fixtures</a></li>
+                <li><a href="division-2.html">Division 2 Fixtures</a></li>
+                <li><a href="league-tables.html">League Tables</a></li>
+              </ul>
+            </li>
+
+            <li class="has-submenu">
+              <a href="#">Competitions</a>
+              <ul class="submenu">
+                <li><a href="team-knockouts.html">Team Knockouts</a></li>
+                <li><a href="#">President's Cup</a></li>
+              </ul>
+            </li>
+
+            <li><a href="rules.html">Rules</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
     <main>
       <h1>League Tables</h1>
 
