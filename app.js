@@ -90,10 +90,7 @@ function calculateLeagueTable(fixtures, teams, division) {
     });
 
   fixtures
-    .filter(
-      (match) =>
-        match.division === division && match.played?.toUpperCase() === "TRUE",
-    )
+    .filter((match) => match.played?.toUpperCase() === "TRUE")
     .forEach((match) => {
       const home = table[match.home];
       const away = table[match.away];
@@ -142,6 +139,14 @@ function calculateLeagueTable(fixtures, teams, division) {
         b.pointsFor - a.pointsFor ||
         a.team.localeCompare(b.team),
     );
+}
+
+function sortByDateAscending(a, b) {
+  return new Date(a.date) - new Date(b.date);
+}
+
+function sortByDateDescending(a, b) {
+  return new Date(b.date) - new Date(a.date);
 }
 
 function createCell(text) {
@@ -360,61 +365,106 @@ function getCurrentDivisionKey() {
   return "division-1";
 }
 
-async function initHomePage() {
+function initSiteChrome() {
   const logoEl = document.getElementById("site-logo");
   if (logoEl) logoEl.src = SITE_DATA.logo;
 
   setupMobileMenu();
   setupClubSlider(SITE_DATA.clubs);
   renderClubFooter(SITE_DATA.clubs);
+}
 
+async function initFixturesPage() {
   try {
     const divisionKey = getCurrentDivisionKey();
     const divisionConfig = DIVISION_CONFIG[divisionKey];
-    const division = divisionConfig.name;
 
     const fixtures = await loadCSV(divisionConfig.fixturesUrl);
-    const teams = await loadCSV(TEAMS_CSV_URL);
 
-    const upcomingFixtures = fixtures
-      .filter((match) => match.played?.toUpperCase() !== "TRUE")
-      .map((match) => ({
-        date: match.date,
-        home: match.home,
-        away: match.away,
-      }));
+    const fixtureRows = fixtures.sort(sortByDateAscending).map((match) => ({
+      date: match.date,
+      home: match.home,
+      result:
+        match.played?.toUpperCase() === "TRUE"
+          ? `${match.home_score} - ${match.away_score}`
+          : "–",
+      away: match.away,
+    }));
 
-    const results = fixtures
-      .filter((match) => match.played?.toUpperCase() === "TRUE")
-      .map((match) => ({
-        date: match.date,
-        fixture: `${match.home} vs ${match.away}`,
-        score: `${match.home_score} - ${match.away_score}`,
-      }));
-
-    const leagueTable = calculateLeagueTable(fixtures, teams, division).map(
-      (team) => ({
-        team: team.team,
-        p: team.played,
-        w: team.won,
-        d: team.drawn,
-        l: team.lost,
-        pts: team.points,
-      }),
-    );
-
-    renderTableRows("fixtures-table", upcomingFixtures, [
+    renderTableRows("fixtures-table", fixtureRows, [
       "date",
       "home",
+      "result",
       "away",
     ]);
-    renderTableRows("results-table", results, ["date", "fixture", "score"]);
-    renderTableRows("league-table-body", leagueTable, [
+  } catch (error) {
+    showError(error.message);
+  }
+}
+
+async function initLeagueTablesPage() {
+  try {
+    const teams = await loadCSV(TEAMS_CSV_URL);
+    const division1Fixtures = await loadCSV(
+      DIVISION_CONFIG["division-1"].fixturesUrl,
+    );
+    const division2Fixtures = await loadCSV(
+      DIVISION_CONFIG["division-2"].fixturesUrl,
+    );
+
+    const division1Table = calculateLeagueTable(
+      division1Fixtures,
+      teams,
+      "Division 1",
+    ).map((team) => ({
+      team: team.team,
+      p: team.played,
+      w: team.won,
+      d: team.drawn,
+      l: team.lost,
+      pf: team.pointsFor,
+      pa: team.pointsAgainst,
+      pd: team.pointsDiff,
+      pts: team.points,
+    }));
+
+    const division2Table = calculateLeagueTable(
+      division2Fixtures,
+      teams,
+      "Division 2",
+    ).map((team) => ({
+      team: team.team,
+      p: team.played,
+      w: team.won,
+      d: team.drawn,
+      l: team.lost,
+      pf: team.pointsFor,
+      pa: team.pointsAgainst,
+      pd: team.pointsDiff,
+      pts: team.points,
+    }));
+
+    renderTableRows("division-1-league-table-body", division1Table, [
       "team",
       "p",
       "w",
       "d",
       "l",
+      "pf",
+      "pa",
+      "pd",
+      "pts",
+    ]);
+
+    renderTableRows("division-2-league-table-body", division2Table, [
+      "team",
+      "p",
+      "w",
+      "d",
+      "l",
+      "pf",
+      "pa",
+      "pd",
       "pts",
     ]);
   } catch (error) {
@@ -422,4 +472,16 @@ async function initHomePage() {
   }
 }
 
-initHomePage();
+async function initPage() {
+  initSiteChrome();
+
+  const pageType = document.body.dataset.page;
+
+  if (pageType === "league-tables") {
+    await initLeagueTablesPage();
+  } else {
+    await initFixturesPage();
+  }
+}
+
+initPage();
